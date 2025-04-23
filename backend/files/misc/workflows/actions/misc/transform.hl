@@ -1,0 +1,15 @@
+
+/*
+ * Transforms the result of multiple actions/arguments into a new object.
+ *
+ * This is useful if you need a lambda object that's aggregated from the
+ * returned lambda objects from multiple (other) actions.
+ */
+.arguments
+   params
+      type:key-value
+      mandatory:bool:false
+.icon:input
+
+// Simply returning all nodes specified as input arguments.
+return-nodes:x:@.arguments/*/*

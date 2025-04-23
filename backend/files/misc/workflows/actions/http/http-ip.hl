@@ -1,0 +1,13 @@
+
+/*
+ * Returns the HTTP request's originating IP address.
+ */
+.arguments
+.icon:http
+
+// Retrieving IP address from equest.
+request.ip
+
+// Returning IP address to caller.
+yield
+   ip:x:@request.ip

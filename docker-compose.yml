@@ -1,0 +1,33 @@
+
+# Docker file to couple frontend and backend, and creating required volumes.
+
+version: "3.3"
+
+services:
+
+  backend:
+    image: servergardens/magic-backend:latest
+    container_name: magic_backend
+    restart: always
+    ports:
+      - "4444:4444"
+    volumes:
+      - magic_files_etc:/magic/files/etc
+      - magic_files_data:/magic/files/data
+      - magic_files_config:/magic/files/config
+      - magic_files_modules:/magic/files/modules
+
+  frontend:
+    image: servergardens/magic-frontend:latest
+    container_name: magic_frontend
+    depends_on:
+      - backend
+    restart: always
+    ports:
+      - "5555:80"
+
+volumes:
+  magic_files_etc:
+  magic_files_data:
+  magic_files_config:
+  magic_files_modules:

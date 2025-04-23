@@ -1,0 +1,16 @@
+
+/*
+ * Loads the specified [file] and returns to caller as [content].
+ */
+.arguments
+   file
+      type:string
+      mandatory:bool:true
+.icon:insert_drive_file
+
+// Loads the specified file.
+load-file:x:@.arguments/*/file
+
+// Returning result of above invocation to caller.
+yield
+   content:x:@load-file

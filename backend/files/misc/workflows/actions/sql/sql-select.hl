@@ -1,0 +1,69 @@
+
+/*
+ * Execute some select SQL statement specified as [sql] towards the specified database and
+ * returns the result of your SQL as a record set.
+ *
+ * Provide [connection-string], [database-type] and [database] to inform the action of
+ * what database you want to execute your SQL towards.
+ */
+.arguments
+   database-type
+      type:enum
+      mandatory:bool:true
+      values
+         .:sqlite
+         .:mssql
+         .:mysql
+         .:pgsql
+   connection-string
+      type:string
+      mandatory:bool:true
+   database
+      type:string
+      mandatory:bool:true
+   sql
+      type:sql
+      mandatory:bool:true
+   params
+      type:key-value
+      mandatory:bool:false
+.icon:cloud_download
+
+// Sanity checking invocation.
+validators.mandatory:x:@.arguments/*/sql
+validators.enum:x:@.arguments/*/database-type
+   .:sqlite
+   .:mssql
+   .:mysql
+   .:pgsql
+
+// Applying defaults.
+validators.default:x:@.arguments
+   connection-string:generic
+   database-type:sqlite
+   database:magic
+
+// Connection string to actually use as we connect.
+.connection-string
+
+// Caller supplied an explicit [connection-string] argument.
+set-value:x:@.connection-string
+   strings.concat
+      .:[
+      get-value:x:@.arguments/*/connection-string
+      .:|
+      get-value:x:@.arguments/*/database
+      .:]
+
+// Connecting to database.
+data.connect:x:@.connection-string
+   database-type:x:@.arguments/*/database-type
+
+   // Parametrizing SQL.
+   add:x:./*/data.select
+      get-nodes:x:@.arguments/*/params/*
+
+   // Executing SQL.
+   data.select:x:@.arguments/*/sql
+      database-type:x:@.arguments/*/database-type
+   return-nodes:x:@data.select/*

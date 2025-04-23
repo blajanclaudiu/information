@@ -1,0 +1,18 @@
+
+/*
+ * Ensures the specified [arg] matches the specified [regex].
+ *
+ * This action will throw an exception with a descriptive text if [arg] is not conforming to [regex].
+ */
+.arguments
+   arg
+      type:string
+      mandatory:bool:true
+   regex
+      type:string
+      mandatory:bool:true
+.icon:shield
+
+// Invoking validator.
+validators.regex:x:@.arguments/*/arg
+   regex:x:@.arguments/*/regex

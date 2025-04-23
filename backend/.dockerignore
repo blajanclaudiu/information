@@ -1,0 +1,7 @@
+**/.DS_Store
+files/modules/**
+files/data/**
+!files/data/.gitkeep
+!files/data/README.md
+!files/modules/README.md
+Properties/launchSettings.json

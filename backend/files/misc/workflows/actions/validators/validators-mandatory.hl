@@ -1,0 +1,14 @@
+
+/*
+ * Ensures the specified [arg] was given.
+ *
+ * This action will throw an exception with a descriptive text explaining if the argument is missing.
+ */
+.arguments
+   arg
+      type:string
+      mandatory:bool:true
+.icon:shield
+
+// Invoking validator.
+validators.mandatory:x:@.arguments/*/arg

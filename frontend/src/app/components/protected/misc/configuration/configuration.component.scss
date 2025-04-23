@@ -1,0 +1,18 @@
+/*
+ * Copyright (c) 2023 Thomas Hansen - For license inquiries you can contact thomas@ainiro.io.
+ */
+
+.reset-mw {
+  min-width: unset;
+}
+
+.full-height {
+  height: calc(100% - 112px);
+}
+
+.config ::ng-deep {
+  .CodeMirror:not(.CodeMirror-fullscreen) {
+    height: 100%;
+    max-height: 57vh;
+  }
+}
